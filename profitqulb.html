@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROFITQULB – Rare Indian Craftsmanship & Heritage Objects</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --dark-bg: #0f0f0f;
+            --charcoal: #1a1a1a;
+            --ivory: #f5f1ed;
+            --cream: #e8e3de;
+            --gold: #c9a961;
+            --gold-light: #dab77a;
+            --text-light: #e8e3de;
+            --text-muted: #a8a09c;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            font-family: 'Lora', serif;
+            line-height: 1.8;
+            font-size: 16px;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(15, 15, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(201, 169, 97, 0.2);
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--gold);
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 13px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 100px 50px 50px;
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.8), rgba(15, 15, 15, 0.9)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><pattern id="dots" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="%23c9a961" opacity="0.1"/></pattern></defs><rect width="1200" height="800" fill="%231a1a1a"/><rect width="1200" height="800" fill="url(%23dots)"/></svg>');
+            background-attachment: fixed;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(201, 169, 97, 0.05), transparent);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.2s forwards;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 72px;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 30px;
+            line-height: 1.1;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.4s forwards;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.6s forwards;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 16px 50px;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.8s forwards;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gold);
+            z-index: -1;
+            transition: left 0.4s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 0;
+        }
+
+        .cta-button:hover {
+            color: var(--dark-bg);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 100px 50px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 52px;
+            margin-bottom: 20px;
+            color: var(--ivory);
+        }
+
+        .section-header::after {
+            content: '';
+            display: inline-block;
+            width: 60px;
+            height: 2px;
+            background: var(--gold);
+            margin-top: 20px;
+        }
+
+        .section-header p {
+            font-size: 16px;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 30px auto 0;
+        }
+
+        /* About Section */
+        #about {
+            background: var(--charcoal);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            margin-bottom: 30px;
+            color: var(--gold);
+        }
+
+        .about-content p {
+            margin-bottom: 20px;
+            color: var(--text-muted);
+            line-height: 1.9;
+        }
+
+        .about-visual {
+            background: linear-gradient(135deg, rgba(201, 169, 97, 0.1), rgba(232, 227, 222, 0.05));
+            border: 1px solid rgba(201, 169, 97, 0.2);
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            color: var(--gold);
+            border-radius: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-visual::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(201, 169, 97, 0.08), transparent);
+            animation: float 15s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-30px); }
+        }
+
+        /* Collections Section */
+        #collections {
+            background: var(--dark-bg);
+        }
+
+        .collections-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .collection-card {
+            background: var(--charcoal);
+            border: 1px solid rgba(201, 169, 97, 0.2);
+            padding: 40px;
+            text-align: center;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .collection-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(201, 169, 97, 0.05);
+            transition: left 0.4s ease;
+            z-index: -1;
+        }
+
+        .collection-card:hover::before {
+            left: 0;
+        }
+
+        .collection-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-10px);
+        }
+
+        .collection-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: var(--gold);
+        }
+
+        .collection-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--ivory);
+        }
+
+        .collection-card p {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        /* Craftsmanship Section */
+        #craftsmanship {
+            background: var(--charcoal);
+        }
+
+        .craftsmanship-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .craftsmanship-text {
+            margin-bottom: 60px;
+        }
+
+        .craftsmanship-text p {
+            font-size: 17px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .step {
+            background: rgba(201, 169, 97, 0.05);
+            border: 1px solid rgba(201, 169, 97, 0.15);
+            padding: 40px 25px;
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            color: var(--gold);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .step h4 {
+            font-size: 16px;
+            color: var(--ivory);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .step p {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Contact Section */
+        #contact {
+            background: var(--dark-bg);
+            text-align: center;
+        }
+
+        .contact-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .contact-content p {
+            font-size: 17px;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px 20px;
+            background: var(--charcoal);
+            border: 1px solid rgba(201, 169, 97, 0.2);
+            color: var(--ivory);
+            font-family: 'Lora', serif;
+            font-size: 15px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            background: rgba(201, 169, 97, 0.02);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .submit-btn {
+            padding: 16px 50px;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            background: transparent;
+            font-family: 'Lora', serif;
+            font-size: 13px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gold);
+            z-index: -1;
+            transition: left 0.4s ease;
+        }
+
+        .submit-btn:hover::before {
+            left: 0;
+        }
+
+        .submit-btn:hover {
+            color: var(--dark-bg);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--charcoal);
+            border-top: 1px solid rgba(201, 169, 97, 0.2);
+            padding: 60px 50px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--gold);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .footer-text {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        .footer-divider {
+            width: 40px;
+            height: 1px;
+            background: var(--gold);
+            margin: 30px auto;
+        }
+
+        .footer-bottom {
+            font-size: 12px;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-section {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 25px;
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .nav-links {
+                gap: 20px;
+                font-size: 11px;
+            }
+
+            .hero {
+                padding: 80px 30px 50px;
+            }
+
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            section {
+                padding: 60px 30px;
+            }
+
+            .section-header h2 {
+                font-size: 36px;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+
+            .collections-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            footer {
+                padding: 40px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">PROFITQULB</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#collections">Collections</a></li>
+            <li><a href="#craftsmanship">Craftsmanship</a></li>
+            <li><a href="#contact">Inquiry</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-subtitle">Heritage Curated for the World</div>
+            <h1>Rare Indian Craftsmanship for Discerning Collectors</h1>
+            <p>Discover exceptional handcrafted objects that embody centuries of cultural heritage, artisan mastery, and timeless artistry. Each piece tells a story of tradition, rarity, and unbounded excellence.</p>
+            <button class="cta-button" onclick="document.getElementById('contact').scrollIntoView();">Explore Collections</button>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="section-header">
+            <h2>Our Philosophy</h2>
+            <p>At PROFITQULB, we believe in the profound beauty of cultural heritage and the extraordinary skill of Indian artisans.</p>
+        </div>
+        <div class="about-grid">
+            <div class="about-content fade-in-section">
+                <h3>Curated Exclusivity</h3>
+                <p>PROFITQULB is not a conventional marketplace. We operate as a private gallery, meticulously curating rare, handcrafted objects of unparalleled cultural and artistic significance.</p>
+                <p>Each piece in our collection has been carefully selected for its exceptional craftsmanship, heritage value, and relevance to global collectors who understand that true luxury lies in authenticity and rarity.</p>
+                <p>We connect discerning collectors, luxury interior designers, and institutions with objects that transcend commerce—pieces that become treasured heirlooms and investment-grade collectibles.</p>
+                <p>Our mission is to celebrate the extraordinary artisans of India while ensuring their creations reach audiences who truly appreciate their cultural depth and timeless artistry.</p>
+            </div>
+            <div class="about-visual fade-in-section">
+                <div>Premium Indian Craftsmanship Awaits</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collections Section -->
+    <section id="collections">
+        <div class="section-header">
+            <h2>Featured Collections</h2>
+            <p>Explore our curated selections of rare Indian heritage objects</p>
+        </div>
+        <div class="collections-grid">
+            <div class="collection-card fade-in-section">
+                <div class="collection-icon">🏺</div>
+                <h3>Ceramic Heritage</h3>
+                <p>Handcrafted pottery and ceramic pieces reflecting centuries of Indian artisanal tradition, each with unique glazing and techniques passed through generations.</p>
+            </div>
+            <div class="collection-card fade-in-section">
+                <div class="collection-icon">✨</div>
+                <h3>Textile Treasures</h3>
+                <p>Exquisite handwoven fabrics, brocades, and embroidered textiles from master craftspeople, representing the pinnacle of Indian textile artistry.</p>
+            </div>
+            <div class="collection-card fade-in-section">
+                <div class="collection-icon">🎨</div>
+                <h3>Artistic Objects</h3>
+                <p>Rare sculptural works, decorative objects, and art pieces that embody the cultural vision and technical mastery of Indian artisans.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Craftsmanship Section -->
+    <section id="craftsmanship">
+        <div class="section-header">
+            <h2>The Art of Creation</h2>
+            <p>Understanding the meticulous process behind every piece</p>
+        </div>
+        <div class="craftsmanship-content">
+            <div class="craftsmanship-text fade-in-section">
+                <p>At PROFITQULB, every object represents far more than a transaction—it is the culmination of ancestral knowledge, technical mastery, and an unwavering commitment to excellence.</p>
+                <p>Our artisans are guardians of heritage traditions, many of which date back centuries. They work with materials sourced thoughtfully, employing techniques that cannot be replicated by machinery or mass production. Each gesture is deliberate. Each detail is intentional.</p>
+                <p>When you acquire a piece from PROFITQULB, you are not simply purchasing an object—you are investing in a living legacy. You become a steward of cultural heritage, a patron of traditional craftsmanship, and a collector of pieces that will appreciate in cultural and monetary value over time.</p>
+            </div>
+            <div class="process-steps">
+                <div class="step fade-in-section">
+                    <div class="step-number">01</div>
+                    <h4>Artisan Selection</h4>
+                    <p>We identify master craftspeople whose work exemplifies the highest standards of heritage and innovation.</p>
+                </div>
+                <div class="step fade-in-section">
+                    <div class="step-number">02</div>
+                    <h4>Material Sourcing</h4>
+                    <p>Careful selection of authentic, sustainable materials that honor traditional techniques and environmental responsibility.</p>
+                </div>
+                <div class="step fade-in-section">
+                    <div class="step-number">03</div>
+                    <h4>Creation Process</h4>
+                    <p>Meticulous handcrafting over weeks or months, employing ancestral methods refined through generations of mastery.</p>
+                </div>
+                <div class="step fade-in-section">
+                    <div class="step-number">04</div>
+                    <h4>Curation & Documentation</h4>
+                    <p>Each piece is authenticated, documented with artisan story, and presented as an investment-grade collectible.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="section-header">
+            <h2>Private Inquiry</h2>
+            <p>For collectors, designers, and institutions interested in exclusive pieces</p>
+        </div>
+        <div class="contact-content fade-in-section">
+            <p>We welcome inquiries from collectors, luxury interior designers, architects, hotel curators, and institutions seeking exceptional heritage objects. Please provide details about your interests, and our team will present curated selections matching your aesthetic and collection vision.</p>
+            <form class="contact-form" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="category">Collector Category *</label>
+                    <input type="text" id="category" name="category" placeholder="e.g., Private Collector, Interior Designer, Institution" required>
+                </div>
+                <div class="form-group">
+                    <label for="interests">Collection Interests</label>
+                    <input type="text" id="interests" name="interests" placeholder="e.g., Ceramics, Textiles, Sculptures">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message *</label>
+                    <textarea id="message" name="message" required placeholder="Tell us about your collection interests and what you're seeking..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Submit Inquiry</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">PROFITQULB</div>
+            <div class="footer-text">Curating Rare Indian Heritage for Global Collectors</div>
+            <div class="footer-divider"></div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 PROFITQULB. All Rights Reserved. | Celebrating Artisan Excellence & Cultural Heritage</p>
+                <p style="margin-top: 10px;">For inquiries: contact@profitqulb.com | Private Collection Curation Services</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Fade in sections on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-section').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Form submission
+        function handleSubmit(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData);
+            
+            // In a real scenario, this would send to a backend
+            // For now, we'll show a confirmation
+            alert(`Thank you for your inquiry, ${data.name}. We will review your request and contact you shortly at ${data.email}.`);
+            event.target.reset();
+        }
+
+        // Smooth navigation highlighting
+        const navLinks = document.querySelectorAll('.nav-links a');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            document.querySelectorAll('section').forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.style.color = '';
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.style.color = 'var(--gold)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
