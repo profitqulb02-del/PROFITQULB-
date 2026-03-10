@@ -291,9 +291,145 @@
             50% { transform: translateY(-30px); }
         }
 
-        /* Collections Section */
-        #collections {
-            background: var(--dark-bg);
+        /* Product Slider */
+        .product-slider-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin-bottom: 80px;
+            background: var(--charcoal);
+            padding: 60px;
+            border: 1px solid rgba(201, 169, 97, 0.2);
+        }
+
+        .product-slider {
+            position: relative;
+            background: rgba(26, 26, 26, 0.5);
+            border-radius: 2px;
+            overflow: hidden;
+            aspect-ratio: 1;
+        }
+
+        .slider-images {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slider-image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .slider-image.active {
+            opacity: 1;
+        }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(201, 169, 97, 0.7);
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+            border-radius: 2px;
+        }
+
+        .slider-btn:hover {
+            background: var(--gold);
+            padding: 15px 25px;
+        }
+
+        .slider-btn.prev {
+            left: 20px;
+        }
+
+        .slider-btn.next {
+            right: 20px;
+        }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(201, 169, 97, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid var(--gold);
+        }
+
+        .dot.active {
+            background: var(--gold);
+            width: 32px;
+            border-radius: 6px;
+        }
+
+        .product-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            margin-bottom: 30px;
+            color: var(--gold);
+        }
+
+        .product-description {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            line-height: 1.9;
+            font-size: 15px;
+        }
+
+        .product-info .cta-button {
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .product-slider-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 40px;
+            }
+
+            .slider-btn {
+                padding: 12px 15px;
+                font-size: 16px;
+            }
+
+            .slider-btn.prev,
+            .slider-btn.next {
+                top: 20px;
+            }
+
+            .slider-btn.prev {
+                left: 10px;
+            }
+
+            .slider-btn.next {
+                right: 10px;
+            }
+
+            .product-info h3 {
+                font-size: 28px;
+            }
         }
 
         .collections-grid {
@@ -663,9 +799,39 @@
     <section id="collections">
         <div class="section-header">
             <h2>Featured Collections</h2>
-            <p>Explore our curated selections of rare Indian heritage objects</p>
+            <p>Explore our curated selections of rare heritage objects</p>
         </div>
-        <div class="collections-grid">
+        
+        <!-- Product Slider -->
+        <div class="product-slider-container fade-in-section">
+            <div class="product-slider">
+                <div class="slider-images">
+                    <img src="https://res.cloudinary.com/dpzkktk7b/image/upload/v1773135506/IMG_20260310_143739_qmqdns.png" alt="PQB Cork Yoga Mat - View 1" class="slider-image active">
+                    <img src="https://res.cloudinary.com/dpzkktk7b/image/upload/v1773135440/IMG_20260310_143756_dggpuc.png" alt="PQB Cork Yoga Mat - View 2" class="slider-image">
+                </div>
+                
+                <!-- Slider Controls -->
+                <button class="slider-btn prev" onclick="changeSlide(-1)">&#10094;</button>
+                <button class="slider-btn next" onclick="changeSlide(1)">&#10095;</button>
+                
+                <!-- Slider Dots -->
+                <div class="slider-dots">
+                    <span class="dot active" onclick="currentSlide(0)"></span>
+                    <span class="dot" onclick="currentSlide(1)"></span>
+                </div>
+            </div>
+            
+            <div class="product-info">
+                <h3>PQB Cork Yoga Mat with Wool</h3>
+                <p class="product-description">The PROFITQULB Ritual Mat was created for those who seek presence rather than performance. Its surface is formed from Portuguese cork, harvested without harming the forest. Beneath it lies Himalayan wool once used by shepherds living above the clouds, naturally cushioning the body against the earth.</p>
+                <p class="product-description">Hidden within its structure rests a delicate copper lattice — a quiet symbol of grounding energy used in ancient craftsmanship. Every layer was chosen not simply for function, but for the feeling it creates.</p>
+                <p class="product-description">Whether placed on a balcony overlooking the Mediterranean, within a Kyoto meditation room, or beneath the soft morning light of California, the mat becomes more than an accessory. It becomes a place where silence begins.</p>
+                <button class="cta-button" onclick="document.getElementById('contact').scrollIntoView();">Inquire About This Piece</button>
+            </div>
+        </div>
+
+        <!-- Additional Collections -->
+        <div class="collections-grid" style="margin-top: 80px;">
             <div class="collection-card fade-in-section">
                 <div class="collection-icon">🏺</div>
                 <h3>Ceramic Heritage</h3>
@@ -763,7 +929,7 @@
             <div class="footer-divider"></div>
             <div class="footer-bottom">
                 <p>&copy; 2024 PROFITQULB. All Rights Reserved. | Celebrating Artisan Excellence & Cultural Heritage</p>
-                <p style="margin-top: 10px;">For inquiries: contact profitqulb02@gmail.com | Private Collection Curation Services</p>
+                <p style="margin-top: 10px;">For inquiries: profitqulb02@gmail.com | Private Collection Curation Services</p>
             </div>
         </div>
     </footer>
@@ -788,14 +954,47 @@
             observer.observe(el);
         });
 
+        // Product Slider Functions
+        let currentSlideIndex = 0;
+
+        function changeSlide(n) {
+            const images = document.querySelectorAll('.slider-image');
+            const dots = document.querySelectorAll('.dot');
+            
+            currentSlideIndex += n;
+            if (currentSlideIndex >= images.length) {
+                currentSlideIndex = 0;
+            }
+            if (currentSlideIndex < 0) {
+                currentSlideIndex = images.length - 1;
+            }
+            
+            images.forEach(img => img.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            images[currentSlideIndex].classList.add('active');
+            dots[currentSlideIndex].classList.add('active');
+        }
+
+        function currentSlide(n) {
+            const images = document.querySelectorAll('.slider-image');
+            const dots = document.querySelectorAll('.dot');
+            
+            currentSlideIndex = n;
+            
+            images.forEach(img => img.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            images[currentSlideIndex].classList.add('active');
+            dots[currentSlideIndex].classList.add('active');
+        }
+
         // Form submission
         function handleSubmit(event) {
             event.preventDefault();
             const formData = new FormData(event.target);
             const data = Object.fromEntries(formData);
             
-            // In a real scenario, this would send to a backend
-            // For now, we'll show a confirmation
             alert(`Thank you for your inquiry, ${data.name}. We will review your request and contact you shortly at ${data.email}.`);
             event.target.reset();
         }
